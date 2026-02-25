@@ -7,7 +7,7 @@ const DashboardLayout = () => {
     const { sidebarCollapsed } = useSelector((state) => state.ui);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-slate-50">
             <Sidebar />
             <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'}`}>
                 <Navbar />

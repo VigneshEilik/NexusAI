@@ -11,7 +11,8 @@
     "pm2:stop": "pm2 stop ecosystem.config.js",
     "pm2:restart": "pm2 restart ecosystem.config.js",
     "lint": "eslint src/",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "seed:plans": "node src/scripts/seedPlans.js"
   },
   "dependencies": {
     "express": "^4.18.2",

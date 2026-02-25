@@ -3,14 +3,19 @@ const config = require('./config');
 const logger = require('./config/logger');
 const connectDB = require('./config/database');
 const { connectRedis } = require('./config/redis');
+const { startPipelineWorker } = require('./workers/pipelineWorker');
+const queueService = require('./services/queueService');
 
 const startServer = async () => {
     try {
         // Connect to MongoDB
         await connectDB();
 
-        // Connect to Redis
+        // Connect to Redis (optional — used for caching)
         await connectRedis();
+
+        // Start MongoDB-based pipeline worker
+        startPipelineWorker();
 
         // Start server
         const server = app.listen(config.port, () => {
@@ -20,6 +25,7 @@ const startServer = async () => {
         // Graceful shutdown
         const shutdown = async (signal) => {
             logger.info(`${signal} received. Shutting down gracefully...`);
+            queueService.stopProcessing();
             server.close(() => {
                 logger.info('Server closed');
                 process.exit(0);

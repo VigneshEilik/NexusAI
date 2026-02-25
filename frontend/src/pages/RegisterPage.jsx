@@ -4,7 +4,16 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/slices/authSlice';
 import { useRegisterMutation } from '../store/api/authApi';
 import toast from 'react-hot-toast';
-import { HiOutlineSparkles, HiOutlineEye, HiOutlineEyeSlash, HiOutlineEnvelope, HiOutlineLockClosed, HiOutlineUser } from 'react-icons/hi2';
+import {
+    HiOutlineSparkles,
+    HiOutlineEye,
+    HiOutlineEyeSlash,
+    HiOutlineUser,
+    HiOutlineRocketLaunch,
+    HiOutlineCpuChip,
+    HiOutlinePresentationChartBar,
+    HiOutlineShieldCheck,
+} from 'react-icons/hi2';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
@@ -54,62 +63,103 @@ const RegisterPage = () => {
 
     return (
         <div className="min-h-screen flex">
-            {/* Left side - Hero */}
-            <div className="hidden lg:flex lg:w-1/2 gradient-hero relative overflow-hidden">
+            {/* ===== LEFT PANEL - Blue Hero ===== */}
+            <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #1e40af 0%, #2563eb 40%, #3b82f6 100%)' }}>
+                {/* Background decorative elements */}
                 <div className="absolute inset-0">
                     <div className="absolute top-20 right-10 w-72 h-72 bg-white/5 rounded-full blur-3xl" />
-                    <div className="absolute bottom-20 left-20 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl" />
+                    <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-300/10 rounded-full blur-3xl" />
+                    {/* Subtle grid pattern */}
+                    <div className="absolute inset-0 opacity-[0.03]" style={{
+                        backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+                        backgroundSize: '24px 24px'
+                    }} />
                 </div>
-                <div className="relative z-10 flex flex-col justify-center px-12 xl:px-16">
-                    <div className="flex items-center gap-3 mb-12">
-                        <div className="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                            <HiOutlineSparkles className="w-7 h-7 text-white" />
+
+                <div className="relative z-10 flex flex-col justify-center px-12 xl:px-16 w-full">
+                    {/* Logo */}
+                    <div className="flex items-center gap-3 mb-14">
+                        <div className="w-11 h-11 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                            <HiOutlineSparkles className="w-6 h-6 text-white" />
                         </div>
-                        <div>
-                            <h1 className="text-2xl font-bold text-white">NexusAI</h1>
-                            <p className="text-xs text-blue-200">Enterprise Platform</p>
-                        </div>
+                        <h1 className="text-xl font-bold text-white tracking-tight">NexusAI</h1>
                     </div>
-                    <h2 className="text-4xl xl:text-5xl font-bold text-white leading-tight mb-6">
+
+                    {/* Tagline */}
+                    <h2 className="text-4xl xl:text-[2.75rem] font-bold text-white leading-tight mb-3">
                         Start Your
-                        <span className="block text-cyan-300">AI Journey Today</span>
                     </h2>
-                    <p className="text-blue-100 text-lg mb-10 max-w-md leading-relaxed">
+                    <h2 className="text-4xl xl:text-[2.75rem] font-bold text-blue-200 leading-tight mb-5">
+                        AI Journey Today
+                    </h2>
+                    <p className="text-blue-100/80 text-base mb-12 max-w-sm leading-relaxed">
                         Create your account and experience AI-powered analytics, intelligent conversations, and data-driven insights.
                     </p>
-                    <div className="glass rounded-2xl p-6 max-w-sm animate-fade-in">
+
+                    {/* Free plan card */}
+                    <div className="bg-white/[0.08] backdrop-blur-sm rounded-2xl p-5 max-w-sm border border-white/10 mb-10 animate-fade-in">
                         <div className="flex items-center gap-3 mb-3">
                             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                                <span className="text-lg">🚀</span>
+                                <HiOutlineRocketLaunch className="w-5 h-5 text-blue-200" />
                             </div>
                             <div>
                                 <p className="text-white font-medium text-sm">Free Forever Plan</p>
-                                <p className="text-blue-200 text-xs">No credit card required</p>
+                                <p className="text-blue-200/70 text-xs">No credit card required</p>
                             </div>
                         </div>
-                        <p className="text-blue-100 text-sm">Get started with 5 free AI conversations per day and basic analytics.</p>
+                        <p className="text-blue-100/70 text-sm">Get started with 5 free AI conversations per day and basic analytics.</p>
+                    </div>
+
+                    {/* Feature badges */}
+                    <div>
+                        <p className="text-xs uppercase tracking-widest text-blue-200/70 font-semibold mb-4">Why choose us</p>
+                        <div className="flex items-center gap-6">
+                            {[
+                                { icon: HiOutlineCpuChip, label: 'AI Powered' },
+                                { icon: HiOutlinePresentationChartBar, label: 'Analytics' },
+                                { icon: HiOutlineShieldCheck, label: 'Secure' },
+                            ].map((item, i) => (
+                                <div key={i} className="flex flex-col items-center gap-2 group cursor-pointer">
+                                    <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center border border-white/15 group-hover:bg-white/20 transition-colors">
+                                        <item.icon className="w-5 h-5 text-blue-200 group-hover:text-white transition-colors" />
+                                    </div>
+                                    <span className="text-[11px] text-blue-200/80 font-medium uppercase tracking-wide">{item.label}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Right side - Form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-white dark:bg-slate-950">
+            {/* ===== RIGHT PANEL - White Form ===== */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 py-12 bg-white">
                 <div className="w-full max-w-md animate-slide-in-right">
-                    <div className="lg:hidden flex items-center gap-2 mb-8">
+                    {/* Mobile logo */}
+                    <div className="lg:hidden flex items-center gap-2 mb-10">
                         <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
                             <HiOutlineSparkles className="w-5 h-5 text-white" />
                         </div>
-                        <span className="text-xl font-bold gradient-text">NexusAI</span>
+                        <span className="text-xl font-bold text-blue-600">NexusAI</span>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Create your account</h2>
-                    <p className="text-slate-500 dark:text-slate-400 mt-1">Start your free trial. No credit card needed.</p>
+                    {/* Heading */}
+                    <div className="text-center mb-6">
+                        <h2 className="text-2xl font-bold text-slate-900">Create Your Account</h2>
+                        <p className="text-slate-500 mt-1.5 text-sm">Start your free trial. No credit card needed.</p>
+                    </div>
 
-                    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                    {/* Divider */}
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="h-px flex-1 bg-slate-200" />
+                        <span className="text-xs text-slate-400 font-medium">sign up with email</span>
+                        <div className="h-px flex-1 bg-slate-200" />
+                    </div>
+
+                    {/* Form */}
+                    <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Full Name</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-1.5">Full Name</label>
                             <div className="relative">
-                                <HiOutlineUser className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
                                     id="register-name"
                                     name="name"
@@ -118,15 +168,15 @@ const RegisterPage = () => {
                                     onChange={handleChange}
                                     placeholder="John Doe"
                                     required
-                                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm"
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm pr-10"
                                 />
+                                <HiOutlineUser className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
                             <div className="relative">
-                                <HiOutlineEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
                                     id="register-email"
                                     name="email"
@@ -135,15 +185,15 @@ const RegisterPage = () => {
                                     onChange={handleChange}
                                     placeholder="you@example.com"
                                     required
-                                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm"
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm pr-10"
                                 />
+                                <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400">@</span>
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Password</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
                             <div className="relative">
-                                <HiOutlineLockClosed className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
                                     id="register-password"
                                     name="password"
@@ -153,9 +203,13 @@ const RegisterPage = () => {
                                     placeholder="••••••••"
                                     required
                                     minLength={8}
-                                    className="w-full pl-11 pr-12 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm"
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm pr-12"
                                 />
-                                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                                >
                                     {showPassword ? <HiOutlineEyeSlash className="w-5 h-5" /> : <HiOutlineEye className="w-5 h-5" />}
                                 </button>
                             </div>
@@ -163,7 +217,7 @@ const RegisterPage = () => {
                                 <div className="mt-2 flex items-center gap-2">
                                     <div className="flex-1 flex gap-1">
                                         {[1, 2, 3, 4].map((i) => (
-                                            <div key={i} className={`h-1 flex-1 rounded-full ${i <= strength.level ? strength.color : 'bg-slate-200 dark:bg-slate-700'}`} />
+                                            <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= strength.level ? strength.color : 'bg-slate-200'}`} />
                                         ))}
                                     </div>
                                     <span className="text-xs text-slate-500">{strength.text}</span>
@@ -172,9 +226,8 @@ const RegisterPage = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Confirm Password</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-1.5">Confirm Password</label>
                             <div className="relative">
-                                <HiOutlineLockClosed className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
                                     id="register-confirm-password"
                                     name="confirmPassword"
@@ -183,23 +236,28 @@ const RegisterPage = () => {
                                     onChange={handleChange}
                                     placeholder="••••••••"
                                     required
-                                    className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm"
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm"
                                 />
                             </div>
                         </div>
 
+                        {/* Terms */}
                         <div className="flex items-start gap-2">
-                            <input type="checkbox" required className="mt-1 w-4 h-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
-                            <span className="text-sm text-slate-500 dark:text-slate-400">
-                                I agree to the <Link to="/terms" className="text-primary-600 hover:underline">Terms of Service</Link> and <Link to="/privacy-policy" className="text-primary-600 hover:underline">Privacy Policy</Link>
+                            <input type="checkbox" required className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
+                            <span className="text-sm text-slate-500">
+                                I agree to the{' '}
+                                <Link to="/terms" className="text-blue-600 hover:underline font-medium">Terms of Service</Link>
+                                {' '}and{' '}
+                                <Link to="/privacy-policy" className="text-blue-600 hover:underline font-medium">Privacy Policy</Link>
                             </span>
                         </div>
 
+                        {/* Submit */}
                         <button
                             id="register-submit"
                             type="submit"
                             disabled={isLoading}
-                            className="w-full py-3 px-4 text-white font-semibold rounded-xl gradient-primary hover:opacity-90 transition-all btn-glow disabled:opacity-50 shadow-lg shadow-primary-500/25 text-sm"
+                            className="w-full py-3.5 px-4 text-white font-semibold rounded-xl bg-slate-900 hover:bg-slate-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-sm"
                         >
                             {isLoading ? (
                                 <div className="flex items-center justify-center gap-2">
@@ -210,10 +268,24 @@ const RegisterPage = () => {
                         </button>
                     </form>
 
-                    <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
+                    {/* Sign in link */}
+                    <p className="mt-8 text-center text-sm text-slate-500">
                         Already have an account?{' '}
-                        <Link to="/login" className="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700">Sign in</Link>
+                        <Link to="/login" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                            Sign in
+                        </Link>
                     </p>
+
+                    {/* Powered by footer */}
+                    <div className="mt-8 text-center">
+                        <p className="text-xs text-slate-400">Powered by</p>
+                        <div className="mt-2 flex items-center justify-center gap-2">
+                            <div className="flex items-center gap-1.5">
+                                <HiOutlineSparkles className="w-4 h-4 text-blue-600" />
+                                <span className="text-sm font-bold text-slate-700">NexusAI</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,9 +17,14 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = store.getState().auth.token;
+        const state = store.getState();
+        const token = state.auth.token;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
+        }
+        const workspace = state.workspace?.activeWorkspace;
+        if (workspace?._id) {
+            config.headers['x-workspace-id'] = workspace._id;
         }
         return config;
     },

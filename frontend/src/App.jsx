@@ -13,6 +13,8 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const ChatPage = lazy(() => import('./pages/ChatPage'));
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage'));
+const PipelinesPage = lazy(() => import('./pages/PipelinesPage'));
+const UsagePage = lazy(() => import('./pages/UsagePage'));
 const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
@@ -76,6 +78,8 @@ function App() {
                 <Route index element={<DashboardPage />} />
                 <Route path="chat" element={<ChatPage />} />
                 <Route path="analytics" element={<AnalyticsPage />} />
+                <Route path="pipelines" element={<PipelinesPage />} />
+                <Route path="usage" element={<UsagePage />} />
                 <Route path="subscription" element={<SubscriptionPage />} />
                 <Route path="profile" element={<ProfilePage />} />
                 <Route path="settings" element={<SettingsPage />} />

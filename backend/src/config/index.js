@@ -20,6 +20,7 @@ const config = {
   },
 
   redis: {
+    enabled: process.env.REDIS_ENABLED === 'true',
     host: process.env.REDIS_HOST || '127.0.0.1',
     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
     password: process.env.REDIS_PASSWORD || undefined,
@@ -36,7 +37,7 @@ const config = {
 
   ollama: {
     baseUrl: process.env.OLLAMA_BASE_URL || 'http://localhost:11434',
-    model: process.env.OLLAMA_MODEL || 'llama3',
+    model: process.env.OLLAMA_MODEL || 'gemma3:4b',
     timeout: parseInt(process.env.OLLAMA_TIMEOUT, 10) || 120000,
   },
 

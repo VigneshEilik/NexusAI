@@ -35,7 +35,7 @@ const chatSchema = new mongoose.Schema(
         messages: [messageSchema],
         model: {
             type: String,
-            default: 'llama3',
+            default: 'gemma3:4b',
         },
         isArchived: {
             type: Boolean,

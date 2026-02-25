@@ -29,7 +29,6 @@ const ChatPage = () => {
         const userMessage = input.trim();
         setInput('');
 
-        // Optimistic update
         dispatch(addMessage({ role: 'user', content: userMessage, timestamp: new Date().toISOString() }));
         dispatch(setStreaming(true));
         dispatch(setStreamingContent(''));
@@ -40,7 +39,6 @@ const ChatPage = () => {
                 chatId: activeChat?._id,
             }).unwrap();
 
-            // Simulate streaming effect
             const fullContent = result.data.message.content;
             let i = 0;
             const streamInterval = setInterval(() => {
@@ -79,11 +77,11 @@ const ChatPage = () => {
     return (
         <div className="flex h-[calc(100vh-8rem)] gap-4 animate-fade-in">
             {/* Chat History Sidebar */}
-            <div className="hidden md:flex w-72 flex-col bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-                <div className="p-4 border-b border-slate-200 dark:border-slate-700">
+            <div className="hidden md:flex w-72 flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                <div className="p-4 border-b border-slate-100">
                     <button
                         onClick={handleNewChat}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white rounded-xl gradient-primary hover:opacity-90 transition-all"
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white rounded-xl bg-blue-600 hover:bg-blue-700 transition-all"
                     >
                         <HiOutlinePlus className="w-4 h-4" />
                         New Chat
@@ -98,9 +96,9 @@ const ChatPage = () => {
                                 key={chat._id}
                                 onClick={() => handleSelectChat(chat)}
                                 className={`w-full text-left px-3 py-2.5 rounded-xl text-sm transition-colors
-                  ${activeChat?._id === chat._id
-                                        ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400'
-                                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50'
+                                    ${activeChat?._id === chat._id
+                                        ? 'bg-blue-50 text-blue-600 border border-blue-100'
+                                        : 'text-slate-600 hover:bg-slate-50'
                                     }`}
                             >
                                 <div className="flex items-center gap-2">
@@ -122,16 +120,16 @@ const ChatPage = () => {
             </div>
 
             {/* Chat Area */}
-            <div className="flex-1 flex flex-col bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div className="flex-1 flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden">
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-4">
                     {messages.length === 0 && !isStreaming ? (
                         <div className="flex flex-col items-center justify-center h-full text-center">
-                            <div className="w-16 h-16 rounded-2xl gradient-primary flex items-center justify-center mb-4 animate-pulse-glow">
+                            <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center mb-4 animate-pulse-glow shadow-lg shadow-blue-600/25">
                                 <HiOutlineSparkles className="w-8 h-8 text-white" />
                             </div>
-                            <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">How can I help you today?</h3>
-                            <p className="text-slate-500 dark:text-slate-400 max-w-md text-sm">
+                            <h3 className="text-xl font-semibold text-slate-900 mb-2">How can I help you today?</h3>
+                            <p className="text-slate-500 max-w-md text-sm">
                                 I'm your AI assistant. Ask me anything — from data analysis to code review, writing, and beyond.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 w-full max-w-lg">
@@ -144,7 +142,7 @@ const ChatPage = () => {
                                     <button
                                         key={suggestion}
                                         onClick={() => { setInput(suggestion); inputRef.current?.focus(); }}
-                                        className="p-3 text-sm text-left text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700"
+                                        className="p-3 text-sm text-left text-slate-600 bg-slate-50 rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-colors border border-slate-200"
                                     >
                                         {suggestion}
                                     </button>
@@ -156,13 +154,13 @@ const ChatPage = () => {
                             {messages.map((msg, i) => (
                                 <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                                     {msg.role !== 'user' && (
-                                        <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center shrink-0">
+                                        <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
                                             <HiOutlineSparkles className="w-4 h-4 text-white" />
                                         </div>
                                     )}
                                     <div className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                                            ? 'bg-primary-600 text-white rounded-br-md'
-                                            : 'bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-bl-md'
+                                        ? 'bg-blue-600 text-white rounded-br-md'
+                                        : 'bg-slate-100 text-slate-800 rounded-bl-md'
                                         }`}>
                                         <p className="whitespace-pre-wrap">{msg.content}</p>
                                     </div>
@@ -172,16 +170,16 @@ const ChatPage = () => {
                             {/* Streaming indicator */}
                             {isStreaming && (
                                 <div className="flex gap-3 justify-start animate-fade-in">
-                                    <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center shrink-0">
+                                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
                                         <HiOutlineSparkles className="w-4 h-4 text-white" />
                                     </div>
-                                    <div className="max-w-[75%] px-4 py-3 rounded-2xl rounded-bl-md bg-slate-100 dark:bg-slate-700 text-sm text-slate-800 dark:text-slate-200 chat-streaming">
+                                    <div className="max-w-[75%] px-4 py-3 rounded-2xl rounded-bl-md bg-slate-100 text-sm text-slate-800 chat-streaming">
                                         <p className="whitespace-pre-wrap chat-content">
                                             {streamingContent || (
                                                 <span className="flex items-center gap-1">
-                                                    <span className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                                    <span className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                                    <span className="w-2 h-2 bg-primary-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                                                 </span>
                                             )}
                                         </p>
@@ -194,7 +192,7 @@ const ChatPage = () => {
                 </div>
 
                 {/* Input */}
-                <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+                <div className="p-4 border-t border-slate-200">
                     <form onSubmit={handleSend} className="flex items-end gap-3">
                         <div className="flex-1 relative">
                             <textarea
@@ -204,14 +202,14 @@ const ChatPage = () => {
                                 onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(e); } }}
                                 placeholder="Type your message..."
                                 rows={1}
-                                className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-sm resize-none"
+                                className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm resize-none"
                                 style={{ minHeight: '44px', maxHeight: '120px' }}
                             />
                         </div>
                         <button
                             type="submit"
                             disabled={!input.trim() || isSending}
-                            className="p-3 rounded-xl gradient-primary text-white hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary-500/25"
+                            className="p-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-600/25"
                         >
                             <HiOutlinePaperAirplane className="w-5 h-5" />
                         </button>

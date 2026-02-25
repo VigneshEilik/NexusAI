@@ -3,7 +3,7 @@ const SkeletonLoader = ({ type = 'card', count = 1 }) => {
         switch (type) {
             case 'card':
                 return (
-                    <div className="rounded-2xl p-6 bg-white dark:bg-slate-800 shadow-sm">
+                    <div className="rounded-2xl p-6 bg-white shadow-sm border border-slate-200">
                         <div className="skeleton h-4 w-3/4 mb-4" />
                         <div className="skeleton h-3 w-full mb-2" />
                         <div className="skeleton h-3 w-5/6 mb-4" />

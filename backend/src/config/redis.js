@@ -5,6 +5,11 @@ const logger = require('./logger');
 let redisClient = null;
 
 const connectRedis = async () => {
+    if (!config.redis.enabled) {
+        logger.info('Redis is disabled (set REDIS_ENABLED=true in .env to enable)');
+        return null;
+    }
+
     try {
         redisClient = createClient({
             socket: {

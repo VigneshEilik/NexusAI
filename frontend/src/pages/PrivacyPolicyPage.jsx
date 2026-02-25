@@ -2,22 +2,22 @@ import { Link } from 'react-router-dom';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 
 const PrivacyPolicyPage = () => (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
-        <nav className="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
+    <div className="min-h-screen bg-white">
+        <nav className="border-b border-slate-200 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-2">
                 <Link to="/" className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
                         <HiOutlineSparkles className="w-4 h-4 text-white" />
                     </div>
-                    <span className="text-lg font-bold gradient-text">NexusAI</span>
+                    <span className="text-lg font-bold text-slate-900">NexusAI</span>
                 </Link>
             </div>
         </nav>
         <div className="max-w-4xl mx-auto px-4 py-12 animate-fade-in">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Privacy Policy</h1>
+            <h1 className="text-3xl font-bold text-slate-900 mb-2">Privacy Policy</h1>
             <p className="text-sm text-slate-400 mb-8">Last updated: February 22, 2026</p>
 
-            <div className="prose dark:prose-invert max-w-none space-y-6">
+            <div className="prose max-w-none space-y-6">
                 {[
                     { title: '1. Information We Collect', content: 'We collect information you provide directly, such as your name, email address, and usage data. We also automatically collect technical information about your device and how you interact with our platform, including IP address, browser type, and cookies.' },
                     { title: '2. How We Use Your Information', content: 'We use the information we collect to provide and improve our services, communicate with you, process transactions, and personalize your experience. We may also use data for analytics and security purposes.' },
@@ -29,8 +29,8 @@ const PrivacyPolicyPage = () => (
                     { title: '8. Contact Us', content: 'If you have questions about this privacy policy, contact us at privacy@nexusai.com.' },
                 ].map((section) => (
                     <div key={section.title}>
-                        <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{section.title}</h2>
-                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{section.content}</p>
+                        <h2 className="text-xl font-semibold text-slate-900 mb-2">{section.title}</h2>
+                        <p className="text-slate-600 text-sm leading-relaxed">{section.content}</p>
                     </div>
                 ))}
             </div>
